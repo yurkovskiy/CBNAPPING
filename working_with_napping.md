@@ -15,15 +15,5 @@
 ```bash
 sudo arp-scan --localnet
 ````
-
 Результат  
 <img src="media/image4.png" />
-
-
-```bash
-nmap -sn 10.0.2.0/24 -oG - | awk '/Up/{print $2}'
-````
-  
-Результат  
-<img src="media/image4.png" />
-
